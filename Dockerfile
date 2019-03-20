@@ -11,8 +11,9 @@ RUN apt-get update && \
     apt-get update && \
     apt-get -y install docker-ce \
     && \
-    rm -rf /var/cache/apk/* \
-    && curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash \
+    rm -rf /var/cache/apk/*
+
+RUN curl https://raw.githubusercontent.com/helm/helm/release-2.13/scripts/get | bash \
     && curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.13.2/bin/linux/amd64/kubectl \
     && mv kubectl /usr/local/bin/ \
     && chmod +x /usr/local/bin/kubectl
