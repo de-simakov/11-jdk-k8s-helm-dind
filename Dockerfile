@@ -13,7 +13,12 @@ RUN apt-get update && \
     && \
     rm -rf /var/cache/apk/*
 
-RUN curl https://raw.githubusercontent.com/helm/helm/release-2.13/scripts/get | bash \
-    && curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.13.2/bin/linux/amd64/kubectl \
+RUN curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.13.0-linux-amd64.tar.gz \
+    && tar -zxvf helm-v2.13.0-linux-amd64.tar.gz \
+    && mv linux-amd64/helm /usr/local/bin/ && mv linux-amd64/tiller /usr/local/bin/ \
+    && rm -fr linux-amd64 \
+    && rm -f helm-v2.13.0-linux-amd64.tar.gz
+
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.13.2/bin/linux/amd64/kubectl \
     && mv kubectl /usr/local/bin/ \
     && chmod +x /usr/local/bin/kubectl
